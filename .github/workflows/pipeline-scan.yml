@@ -1,6 +1,8 @@
 name: Pipeline Security Scan
 
 on:
+  push:
+    branches: [workshop]
   workflow_dispatch:
   workflow_call:
     outputs:
