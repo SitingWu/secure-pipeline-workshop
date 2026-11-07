@@ -78,17 +78,17 @@ By the end of this module, you will:
 
 ```yaml
 - name: Set Up Ruby
-  uses: ruby/setup-ruby@0ecad18fe538ef70f6b82773daecc6af1a7fe58a # v1.252.0
+  uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
   with:
     ruby-version: '3.3'
 ```
 
-Use any current SHA from a tagged release of [`ruby/setup-ruby`](https://github.com/ruby/setup-ruby/tags) — the one above is `v1.252.0` at the time of writing.
+Use any current SHA from a tagged release of [`ruby/setup-ruby`](https://github.com/ruby/setup-ruby/tags) — the one above is `v1.336.0` at the time of writing.
 
 </details>
 
 <details>
-<summary><b>zizmor</b> — <code>zizmor/unpinned-uses</code> on <code>.github/workflows/pipeline-scan.yml:26</code></summary>
+<summary><b>zizmor</b> — <code>zizmor/unpinned-uses</code> on <code>.github/workflows/pipeline-scan.yml:28</code></summary>
 
 **What zizmor flagged**: the snippet's `Run zizmor 🌈` step uses `zizmorcore/zizmor-action@main` — same antipattern as the Claws example, just on zizmor's own action.
 
@@ -99,7 +99,7 @@ Use any current SHA from a tagged release of [`ruby/setup-ruby`](https://github.
 ```yaml
 - name: Run zizmor 🌈
   id: zizmor
-  uses: zizmorcore/zizmor-action@b1d7e1fb5de872772f31590499237e7cce841e8e # v0.5.3
+  uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
   with:
     min-severity: "high"
     online-audits: "false"
