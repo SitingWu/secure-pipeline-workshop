@@ -17,6 +17,8 @@ jobs:
   pipeline-scan:
     name: Pipeline Scan with Claws
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       result: ${{ steps.scan-result.outputs.result }}
     steps:
@@ -99,3 +101,28 @@ jobs:
             echo "❌ Pipeline scan failed - security issues detected in workflows"
             exit 1
           fi
+
+  warden-identity:
+    name: Verify Warden Lab Identity
+    needs: pipeline-scan
+    if: >-
+      github.event_name == 'pull_request' &&
+      startsWith(github.head_ref, 'unicrons-') &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Configure Warden lab credentials
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: arn:aws:iam::105014798395:role/warden-production
+          aws-region: us-east-1
+          role-session-name: WardenLabIdentity
+          role-duration-seconds: 900
+          allowed-account-ids: '105014798395'
+
+      - name: Verify assumed identity
+        run: aws sts get-caller-identity

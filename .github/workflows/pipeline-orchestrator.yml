@@ -11,6 +11,7 @@ jobs:
   pipeline-scan:
     uses: ./.github/workflows/pipeline-scan.yml
     permissions:
+      id-token: write
       security-events: write
       contents: read
       actions: read
